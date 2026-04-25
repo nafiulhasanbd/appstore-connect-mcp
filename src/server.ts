@@ -6,9 +6,16 @@ import { registerTestFlightTools } from "./tools/testflight.js";
 import { registerReviewTools } from "./tools/reviews.js";
 import { registerSalesTools } from "./tools/sales.js";
 import { registerUserTools } from "./tools/users.js";
+import { registerMetadataTools } from "./tools/metadata.js";
+import { registerLocalizationTools } from "./tools/localizations.js";
+import { registerMediaTools } from "./tools/media.js";
+import { registerPricingTools } from "./tools/pricing.js";
+import { registerIapTools } from "./tools/iap.js";
+import { registerSubscriptionTools } from "./tools/subscriptions.js";
+import { registerSubmissionTools } from "./tools/submission.js";
 
 export const SERVER_NAME = "appstore-connect-mcp";
-export const SERVER_VERSION = "1.0.0";
+export const SERVER_VERSION = "1.1.0";
 
 export function createServer(): McpServer {
   const server = new McpServer({
@@ -22,6 +29,13 @@ export function createServer(): McpServer {
   registerReviewTools(server);
   registerSalesTools(server);
   registerUserTools(server);
+  registerMetadataTools(server);
+  registerLocalizationTools(server);
+  registerMediaTools(server);
+  registerPricingTools(server);
+  registerIapTools(server);
+  registerSubscriptionTools(server);
+  registerSubmissionTools(server);
 
   return server;
 }
@@ -30,6 +44,5 @@ export async function startServer(): Promise<void> {
   const server = createServer();
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  // stderr only — stdout reserved for MCP protocol
   console.error(`${SERVER_NAME} v${SERVER_VERSION} running on stdio`);
 }

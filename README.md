@@ -73,6 +73,8 @@ Same JSON shape as Claude Desktop — see [examples/](./examples/) for ready-to-
 
 ## Available Tools
 
+**60+ tools across 13 groups.** End-to-end App Store submission supported, except binary upload (use Transporter / `xcrun altool`) and initial app creation (web UI / Developer Portal).
+
 ### Apps
 
 | Tool | Description |
@@ -81,6 +83,91 @@ Same JSON shape as Claude Desktop — see [examples/](./examples/) for ready-to-
 | `get_app` | Get one app with optional related resources. |
 | `list_app_store_versions` | List versions for an app, filterable by store state. |
 | `get_app_store_version` | Get a single App Store version. |
+
+### App Metadata & Categories
+
+| Tool | Description |
+|------|-------------|
+| `list_app_infos` | List appInfo records (per-state metadata). |
+| `update_app_info` | Set primary/secondary categories and subcategories. |
+| `list_app_categories` | List Apple's category catalog. |
+| `list_app_info_localizations` | List localized name/subtitle/privacy URLs. |
+| `create_app_info_localization` | Add a locale (name, subtitle, privacy URL). |
+| `update_app_info_localization` | Edit name/subtitle/privacy URLs in one locale. |
+
+### Version Localizations (Description, Keywords, What's New)
+
+| Tool | Description |
+|------|-------------|
+| `list_app_store_version_localizations` | List per-locale version metadata. |
+| `get_app_store_version_localization` | Get one locale's metadata. |
+| `create_app_store_version_localization` | Add a locale with description, keywords, promo text, what's new, marketing/support URLs. |
+| `update_app_store_version_localization` | Edit any of the above. |
+| `delete_app_store_version_localization` | Remove a locale from a version. |
+
+### Screenshots & App Previews
+
+| Tool | Description |
+|------|-------------|
+| `list_screenshot_sets` | List screenshot sets per device size. |
+| `create_screenshot_set` | Create a set for a device size (e.g. APP_IPHONE_67). |
+| `upload_screenshot` | Reserve + upload + commit a screenshot file. |
+| `list_screenshots` | List uploaded screenshots in a set. |
+| `reorder_screenshots` | Set display order. |
+| `delete_screenshot` | Delete one screenshot. |
+| `list_preview_sets` / `create_preview_set` | App preview video sets. |
+| `upload_app_preview` | Reserve + upload + commit a preview video. |
+
+### Pricing & Availability
+
+| Tool | Description |
+|------|-------------|
+| `get_app_price_schedule` | Get current price schedule. |
+| `set_app_price_schedule` | Set base territory + scheduled price periods. |
+| `list_app_price_points` | List Apple price tiers. |
+| `get_app_availability` | Get territories where app is offered. |
+| `set_app_availability` | Replace territory list. |
+| `list_territories` | List Apple territories. |
+
+### In-App Purchases
+
+| Tool | Description |
+|------|-------------|
+| `list_in_app_purchases` | List IAPs (consumables, non-consumables, non-renewing subs). |
+| `get_in_app_purchase` | Get one IAP. |
+| `create_in_app_purchase` | Create a new IAP. |
+| `update_in_app_purchase` | Edit reference name, review note, family sharing. |
+| `delete_in_app_purchase` | Delete a draft IAP. |
+| `create_in_app_purchase_localization` | Localized name + description. |
+| `submit_in_app_purchase_for_review` | Send IAP to App Review. |
+
+### Subscriptions
+
+| Tool | Description |
+|------|-------------|
+| `list_subscription_groups` | List groups. |
+| `create_subscription_group` | Create a new group. |
+| `list_subscriptions_in_group` | List subscription tiers. |
+| `create_subscription` | Create an auto-renewing subscription tier. |
+| `create_subscription_localization` | Localized name + description. |
+| `create_subscription_price` | Schedule a price change. |
+| `list_subscription_price_points` | Apple subscription price tiers. |
+| `create_subscription_introductory_offer` | Free trial / pay-as-you-go / pay-up-front. |
+| `submit_subscription_for_review` | Send subscription to review. |
+
+### Submission & Release
+
+| Tool | Description |
+|------|-------------|
+| `create_app_store_version` | Start a new version draft. |
+| `update_app_store_version` | Edit version string, copyright, release type. |
+| `delete_app_store_version` | Delete an unsubmitted draft. |
+| `attach_build_to_version` | Bind an uploaded build to the version. |
+| `create_app_store_review_submission` | Open a review submission. |
+| `add_version_to_review_submission` | Attach a version (or IAP, etc.) to the submission. |
+| `submit_review_submission` | Final submit to App Review. |
+| `create_phased_release` / `update_phased_release` | 7-day phased rollout. |
+| `create_app_store_version_release_request` | Manually release an approved version. |
 
 ### Builds
 
@@ -123,6 +210,20 @@ Same JSON shape as Claude Desktop — see [examples/](./examples/) for ready-to-
 | `list_team_users` | List team members and their roles. |
 | `get_team_user` | Get one team user. |
 | `list_user_invitations` | List pending team invitations. |
+
+## End-to-End Submission Flow
+
+Typical sequence for shipping a new version, all callable from Claude:
+
+1. `create_app_store_version` → version draft.
+2. `create_app_store_version_localization` (one per locale) → description, keywords, what's new.
+3. `create_screenshot_set` + `upload_screenshot` (per device size, per locale).
+4. `update_app_info` → categories.
+5. `set_app_price_schedule` + `set_app_availability` → pricing & territories.
+6. (Optional) `create_in_app_purchase` / `create_subscription` + their localizations.
+7. Upload binary via Transporter / `xcrun altool` (out of API scope), then `attach_build_to_version`.
+8. `create_app_store_review_submission` → `add_version_to_review_submission` → `submit_review_submission`.
+9. (Optional) `create_phased_release` for staged rollout.
 
 ## Configuration
 

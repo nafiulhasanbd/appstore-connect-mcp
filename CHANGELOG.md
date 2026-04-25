@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-04-25
+
+### Added — End-to-end App Store submission
+
+- **App metadata**: `list_app_infos`, `update_app_info`, `list_app_categories`, `list_app_info_localizations`, `create_app_info_localization`, `update_app_info_localization`.
+- **Version localizations**: `list_app_store_version_localizations`, `get_app_store_version_localization`, `create_app_store_version_localization`, `update_app_store_version_localization`, `delete_app_store_version_localization`.
+- **Screenshots & previews**: `list_screenshot_sets`, `create_screenshot_set`, `upload_screenshot` (reserve + chunked upload + commit), `list_screenshots`, `reorder_screenshots`, `delete_screenshot`, `list_preview_sets`, `create_preview_set`, `upload_app_preview`.
+- **Pricing**: `get_app_price_schedule`, `set_app_price_schedule`, `list_app_price_points`, `get_app_availability`, `set_app_availability`, `list_territories`.
+- **IAP**: `list_in_app_purchases`, `get_in_app_purchase`, `create_in_app_purchase`, `update_in_app_purchase`, `delete_in_app_purchase`, `create_in_app_purchase_localization`, `submit_in_app_purchase_for_review`.
+- **Subscriptions**: `list_subscription_groups`, `create_subscription_group`, `list_subscriptions_in_group`, `create_subscription`, `create_subscription_localization`, `create_subscription_price`, `list_subscription_price_points`, `create_subscription_introductory_offer`, `submit_subscription_for_review`.
+- **Submission & release**: `create_app_store_version`, `update_app_store_version`, `delete_app_store_version`, `attach_build_to_version`, `create_app_store_review_submission`, `add_version_to_review_submission`, `submit_review_submission`, `create_phased_release`, `update_phased_release`, `create_app_store_version_release_request`.
+
+### Changed
+
+- Bundle size 28KB → 87KB.
+- Tests expanded: 12 → 17 (added submission + localization coverage).
+
 ## [1.0.0] - 2026-04-25
 
 ### Added
