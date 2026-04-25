@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-04-25
+
+### Added — In-App Events
+
+- **In-App Events**: `list_app_events`, `get_app_event`, `create_app_event`, `update_app_event`, `submit_app_event_for_review`, `archive_app_event`, `delete_app_event`, `list_app_event_localizations`, `create_app_event_localization`, `update_app_event_localization`, `delete_app_event_localization`, `primary_locale_for_app_event`.
+
+### Changed
+
+- Bundle 108KB → 121KB.
+- Tests 22 → 25.
+
 ## [1.2.0] - 2026-04-25
 
 ### Added — Growth & Marketing

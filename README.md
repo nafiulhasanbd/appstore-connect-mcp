@@ -73,7 +73,7 @@ Same JSON shape as Claude Desktop — see [examples/](./examples/) for ready-to-
 
 ## Available Tools
 
-**80+ tools across 15 groups.** End-to-end App Store submission, Custom Product Pages, and Product Page Optimization (A/B tests) all supported. Only binary upload (use Transporter / `xcrun altool`) and initial app creation (web UI / Developer Portal) fall outside the API.
+**90+ tools across 16 groups.** End-to-end App Store submission, Custom Product Pages, Product Page Optimization (A/B tests), and In-App Events all supported. Only binary upload (use Transporter / `xcrun altool`) and initial app creation (web UI / Developer Portal) fall outside the API.
 
 ### Apps
 
@@ -168,6 +168,22 @@ Same JSON shape as Claude Desktop — see [examples/](./examples/) for ready-to-
 | `submit_review_submission` | Final submit to App Review. |
 | `create_phased_release` / `update_phased_release` | 7-day phased rollout. |
 | `create_app_store_version_release_request` | Manually release an approved version. |
+
+### In-App Events
+
+| Tool | Description |
+|------|-------------|
+| `list_app_events` | List events by state. |
+| `get_app_event` | Get one event. |
+| `create_app_event` | Create a draft event with badge, purpose, priority, schedule, territories. |
+| `update_app_event` | Edit any attribute or transition state. |
+| `submit_app_event_for_review` | Send to App Review (READY_FOR_REVIEW). |
+| `archive_app_event` | Archive a past event. |
+| `delete_app_event` | Delete a draft event. |
+| `list_app_event_localizations` | Per-locale name + descriptions. |
+| `create_app_event_localization` | Add a locale (name, short desc, long desc). |
+| `update_app_event_localization` | Edit a locale. |
+| `delete_app_event_localization` | Remove a locale. |
 
 ### Custom Product Pages (CPP)
 

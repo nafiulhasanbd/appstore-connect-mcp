@@ -13,3 +13,4 @@ export { registerSubscriptionTools } from "./subscriptions.js";
 export { registerSubmissionTools } from "./submission.js";
 export { registerCustomProductPageTools } from "./customProductPages.js";
 export { registerExperimentTools } from "./experiments.js";
+export { registerAppEventTools } from "./appEvents.js";
