@@ -2,7 +2,8 @@
 
 > Manage your Apple App Store Connect account directly from Claude, Cursor, VS Code, Windsurf, or any MCP-compatible client.
 
-[![npm version](https://img.shields.io/npm/v/appstore-connect-mcp.svg)](https://www.npmjs.com/package/appstore-connect-mcp)
+[![npm version](https://img.shields.io/npm/v/%40nafiulhasanbd%2Fapp-store-connect-mcp.svg)](https://www.npmjs.com/package/@nafiulhasanbd/app-store-connect-mcp)
+[![npm downloads](https://img.shields.io/npm/dm/%40nafiulhasanbd%2Fapp-store-connect-mcp.svg)](https://www.npmjs.com/package/@nafiulhasanbd/app-store-connect-mcp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![MCP Compatible](https://img.shields.io/badge/MCP-compatible-blue)](https://modelcontextprotocol.io)
 
@@ -44,7 +45,7 @@ Open `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) o
   "mcpServers": {
     "appstore-connect": {
       "command": "npx",
-      "args": ["-y", "appstore-connect-mcp"],
+      "args": ["-y", "@nafiulhasanbd/app-store-connect-mcp"],
       "env": {
         "APP_STORE_CONNECT_KEY_ID": "ABC1234DEF",
         "APP_STORE_CONNECT_ISSUER_ID": "00000000-0000-0000-0000-000000000000",
@@ -64,7 +65,7 @@ claude mcp add appstore-connect \
   -e APP_STORE_CONNECT_KEY_ID=ABC1234DEF \
   -e APP_STORE_CONNECT_ISSUER_ID=00000000-0000-0000-0000-000000000000 \
   -e APP_STORE_CONNECT_PRIVATE_KEY_PATH=/Users/you/keys/AuthKey_ABC1234DEF.p8 \
-  -- npx -y appstore-connect-mcp
+  -- npx -y @nafiulhasanbd/app-store-connect-mcp
 ```
 
 ### 4. Add to Cursor / VS Code / Windsurf
@@ -300,7 +301,7 @@ Found a vulnerability? See [SECURITY.md](./SECURITY.md).
 ## Local Development
 
 ```bash
-git clone https://github.com/pointerflow/appstore-connect-mcp
+git clone https://github.com/nafiulhasanbd/appstore-connect-mcp
 cd appstore-connect-mcp
 npm install
 cp .env.example .env

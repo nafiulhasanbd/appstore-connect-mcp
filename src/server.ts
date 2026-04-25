@@ -18,7 +18,7 @@ import { registerExperimentTools } from "./tools/experiments.js";
 import { registerAppEventTools } from "./tools/appEvents.js";
 
 export const SERVER_NAME = "appstore-connect-mcp";
-export const SERVER_VERSION = "1.3.0";
+export const SERVER_VERSION = "1.3.1";
 
 export function createServer(): McpServer {
   const server = new McpServer({

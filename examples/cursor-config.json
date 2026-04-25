@@ -2,7 +2,7 @@
   "mcpServers": {
     "appstore-connect": {
       "command": "npx",
-      "args": ["-y", "appstore-connect-mcp"],
+      "args": ["-y", "@nafiulhasanbd/app-store-connect-mcp"],
       "env": {
         "APP_STORE_CONNECT_KEY_ID": "ABC1234DEF",
         "APP_STORE_CONNECT_ISSUER_ID": "00000000-0000-0000-0000-000000000000",

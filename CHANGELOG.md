@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-04-25
+
+### Changed
+
+- Renamed npm package from `appstore-connect-mcp` to `app-store-connect-mcp` (the previous name was already taken on the registry by another author).
+- Fixed `repository.url` to point at `nafiulhasanbd/app-store-connect-mcp`.
+
+### Action required
+
+- If you installed `appstore-connect-mcp` from this repo previously, switch your config's `args` to `["-y", "app-store-connect-mcp"]`.
+
 ## [1.3.0] - 2026-04-25
 
 ### Added — In-App Events
