@@ -1,0 +1,168 @@
+# App Store Connect MCP
+
+> Manage your Apple App Store Connect account directly from Claude, Cursor, VS Code, Windsurf, or any MCP-compatible client.
+
+[![npm version](https://img.shields.io/npm/v/appstore-connect-mcp.svg)](https://www.npmjs.com/package/appstore-connect-mcp)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![MCP Compatible](https://img.shields.io/badge/MCP-compatible-blue)](https://modelcontextprotocol.io)
+
+Built by [Nafiul Hasan](https://github.com/pointerflow) at Pointerflow LLC.
+
+## Works With
+
+Claude Desktop · Claude Code · Cursor · VS Code (with MCP) · Windsurf · any MCP client
+
+## What It Does
+
+This MCP server gives an LLM safe, structured access to the [App Store Connect API](https://developer.apple.com/documentation/appstoreconnectapi). Once configured, you can ask Claude things like:
+
+- "Show me all my apps and their current store states."
+- "List the latest TestFlight builds for app `com.acme.foo` and tell me which are still processing."
+- "Pull the last 50 one-star reviews from the US for app X. Draft polite responses I can paste."
+- "Download yesterday's daily sales report for vendor 12345."
+- "Invite alice@example.com to my 'Power Users' beta group."
+
+All calls are made server-side using your own API key — your credentials never touch the LLM.
+
+## Quick Start
+
+### 1. Generate an App Store Connect API key
+
+1. Go to [appstoreconnect.apple.com](https://appstoreconnect.apple.com/access/integrations/api).
+2. **Users and Access → Integrations → App Store Connect API**.
+3. Click **Generate API Key** (or **+** if you already have one).
+4. Give it a role appropriate to what you want Claude to do (Admin, App Manager, Developer, etc.).
+5. Download the `.p8` file. **You can only download it once — store it securely.**
+6. Note your **Key ID** (10 chars) and **Issuer ID** (UUID at the top of the page).
+
+### 2. Add to Claude Desktop
+
+Open `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows) and add:
+
+```json
+{
+  "mcpServers": {
+    "appstore-connect": {
+      "command": "npx",
+      "args": ["-y", "appstore-connect-mcp"],
+      "env": {
+        "APP_STORE_CONNECT_KEY_ID": "ABC1234DEF",
+        "APP_STORE_CONNECT_ISSUER_ID": "00000000-0000-0000-0000-000000000000",
+        "APP_STORE_CONNECT_PRIVATE_KEY_PATH": "/Users/you/keys/AuthKey_ABC1234DEF.p8"
+      }
+    }
+  }
+}
+```
+
+Restart Claude Desktop. The tools appear under the plug icon.
+
+### 3. Add to Claude Code
+
+```bash
+claude mcp add appstore-connect \
+  -e APP_STORE_CONNECT_KEY_ID=ABC1234DEF \
+  -e APP_STORE_CONNECT_ISSUER_ID=00000000-0000-0000-0000-000000000000 \
+  -e APP_STORE_CONNECT_PRIVATE_KEY_PATH=/Users/you/keys/AuthKey_ABC1234DEF.p8 \
+  -- npx -y appstore-connect-mcp
+```
+
+### 4. Add to Cursor / VS Code / Windsurf
+
+Same JSON shape as Claude Desktop — see [examples/](./examples/) for ready-to-paste configs.
+
+## Available Tools
+
+### Apps
+
+| Tool | Description |
+|------|-------------|
+| `list_apps` | List all apps. Filter by bundle ID, name, SKU. |
+| `get_app` | Get one app with optional related resources. |
+| `list_app_store_versions` | List versions for an app, filterable by store state. |
+| `get_app_store_version` | Get a single App Store version. |
+
+### Builds
+
+| Tool | Description |
+|------|-------------|
+| `list_builds` | List builds. Filter by app, version, processing state. |
+| `get_build` | Get one build with full details. |
+| `list_pre_release_versions` | List TestFlight marketing versions. |
+
+### TestFlight
+
+| Tool | Description |
+|------|-------------|
+| `list_beta_groups` | List internal & external beta groups. |
+| `list_beta_testers` | List testers. Filter by app, group, email. |
+| `create_beta_tester` | Invite a tester to one or more groups. |
+| `delete_beta_tester` | Remove a tester from your account. |
+| `submit_build_for_beta_review` | Submit a build for external TestFlight review. |
+
+### Customer Reviews
+
+| Tool | Description |
+|------|-------------|
+| `list_customer_reviews` | List reviews. Filter by territory, rating, response status. |
+| `get_customer_review` | Get a single review. |
+| `respond_to_customer_review` | Publish a developer response. |
+| `delete_customer_review_response` | Remove a published response. |
+
+### Sales & Finance Reports
+
+| Tool | Description |
+|------|-------------|
+| `download_sales_report` | Download a sales / subscription / subscriber report (gzipped TSV, returned base64). |
+| `download_finance_report` | Download a finance / proceeds report by region and fiscal month. |
+
+### Team Users
+
+| Tool | Description |
+|------|-------------|
+| `list_team_users` | List team members and their roles. |
+| `get_team_user` | Get one team user. |
+| `list_user_invitations` | List pending team invitations. |
+
+## Configuration
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `APP_STORE_CONNECT_KEY_ID` | yes | 10-character Key ID from the API page |
+| `APP_STORE_CONNECT_ISSUER_ID` | yes | UUID issuer ID for your account |
+| `APP_STORE_CONNECT_PRIVATE_KEY_PATH` | yes\* | Absolute path to the downloaded `.p8` file |
+| `APP_STORE_CONNECT_PRIVATE_KEY` | yes\* | OR the key contents (PEM, `\n`-escaped allowed) |
+| `APP_STORE_CONNECT_BASE_URL` | no | Override API base URL |
+| `APP_STORE_CONNECT_TIMEOUT_MS` | no | Per-request timeout, default `30000` |
+
+\* Provide either `_PATH` or `_PRIVATE_KEY`, not both.
+
+## Security
+
+- Credentials are read from environment variables only. The server never logs the key, never echoes it to stdout, and never sends it to the LLM.
+- JWTs are minted in memory with a 20-minute TTL (the Apple maximum) and refreshed automatically.
+- All requests use HTTPS to `api.appstoreconnect.apple.com`.
+- The `.p8` file should be `chmod 600` and never committed.
+
+Found a vulnerability? See [SECURITY.md](./SECURITY.md).
+
+## Local Development
+
+```bash
+git clone https://github.com/pointerflow/appstore-connect-mcp
+cd appstore-connect-mcp
+npm install
+cp .env.example .env
+# Fill .env with real credentials
+npm run dev      # starts on stdio
+npm test         # vitest
+npm run build    # tsup → dist/
+```
+
+## Contributing
+
+PRs welcome — see [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+## License
+
+MIT — see [LICENSE](./LICENSE).
