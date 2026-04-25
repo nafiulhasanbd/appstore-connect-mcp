@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-04-25
+
+### Added — Age Ratings
+
+- **Age Ratings**: `get_age_rating_declaration`, `update_age_rating_declaration`. Supports all 18 content descriptors (alcohol/drug use, contests, gambling, gambling simulated, horror, kids age band, loot box, mature themes, medical info, profanity, sexual content variants, unrestricted web access, three violence levels, 17+ override).
+
+### Changed
+
+- Bundle 121 KB → 126 KB.
+- Tests 25 → 27.
+
 ## [1.3.1] - 2026-04-25
 
 ### Changed

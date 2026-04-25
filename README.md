@@ -74,7 +74,7 @@ Same JSON shape as Claude Desktop — see [examples/](./examples/) for ready-to-
 
 ## Available Tools
 
-**90+ tools across 16 groups.** End-to-end App Store submission, Custom Product Pages, Product Page Optimization (A/B tests), and In-App Events all supported. Only binary upload (use Transporter / `xcrun altool`) and initial app creation (web UI / Developer Portal) fall outside the API.
+**90+ tools across 17 groups.** End-to-end App Store submission, Custom Product Pages, Product Page Optimization (A/B tests), In-App Events, and Age Ratings all supported. Only binary upload (use Transporter / `xcrun altool`) and initial app creation (web UI / Developer Portal) fall outside the API.
 
 ### Apps
 
@@ -169,6 +169,13 @@ Same JSON shape as Claude Desktop — see [examples/](./examples/) for ready-to-
 | `submit_review_submission` | Final submit to App Review. |
 | `create_phased_release` / `update_phased_release` | 7-day phased rollout. |
 | `create_app_store_version_release_request` | Manually release an approved version. |
+
+### Age Ratings
+
+| Tool | Description |
+|------|-------------|
+| `get_age_rating_declaration` | Fetch current rating declaration for an appInfo. |
+| `update_age_rating_declaration` | Set content descriptors (violence, sexual content, gambling, etc.) — Apple recomputes the resulting rating. |
 
 ### In-App Events
 

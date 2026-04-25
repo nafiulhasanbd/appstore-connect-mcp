@@ -1,6 +1,6 @@
 {
   "name": "@nafiulhasanbd/app-store-connect-mcp",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "MCP server for Apple App Store Connect — manage apps, builds, TestFlight, reviews, and sales reports directly from Claude",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

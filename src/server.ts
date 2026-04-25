@@ -16,9 +16,10 @@ import { registerSubmissionTools } from "./tools/submission.js";
 import { registerCustomProductPageTools } from "./tools/customProductPages.js";
 import { registerExperimentTools } from "./tools/experiments.js";
 import { registerAppEventTools } from "./tools/appEvents.js";
+import { registerAgeRatingTools } from "./tools/ageRatings.js";
 
 export const SERVER_NAME = "appstore-connect-mcp";
-export const SERVER_VERSION = "1.3.1";
+export const SERVER_VERSION = "1.4.0";
 
 export function createServer(): McpServer {
   const server = new McpServer({
@@ -42,6 +43,7 @@ export function createServer(): McpServer {
   registerCustomProductPageTools(server);
   registerExperimentTools(server);
   registerAppEventTools(server);
+  registerAgeRatingTools(server);
 
   return server;
 }
