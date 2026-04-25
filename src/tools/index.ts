@@ -11,3 +11,5 @@ export { registerPricingTools } from "./pricing.js";
 export { registerIapTools } from "./iap.js";
 export { registerSubscriptionTools } from "./subscriptions.js";
 export { registerSubmissionTools } from "./submission.js";
+export { registerCustomProductPageTools } from "./customProductPages.js";
+export { registerExperimentTools } from "./experiments.js";

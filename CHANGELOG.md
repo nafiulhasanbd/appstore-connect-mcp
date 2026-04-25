@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-04-25
+
+### Added — Growth & Marketing
+
+- **Custom Product Pages**: `list_custom_product_pages`, `get_custom_product_page`, `create_custom_product_page`, `update_custom_product_page`, `delete_custom_product_page`, `list_custom_product_page_versions`, `create_custom_product_page_version`, `list_custom_product_page_localizations`, `create_custom_product_page_localization`, `update_custom_product_page_localization`, `list_custom_product_page_screenshot_sets`.
+- **Product Page Optimization (PPO)**: `list_app_store_version_experiments`, `get_app_store_version_experiment`, `create_app_store_version_experiment`, `update_app_store_version_experiment`, `delete_app_store_version_experiment`, `list_experiment_treatments`, `create_experiment_treatment`, `update_experiment_treatment`, `delete_experiment_treatment`, `list_experiment_treatment_localizations`, `create_experiment_treatment_localization`, `start_app_store_version_experiment`, `stop_app_store_version_experiment`.
+
+### Changed
+
+- Bundle 87KB → 108KB.
+- Tests 17 → 22 (added CPP + experiment coverage).
+
 ## [1.1.0] - 2026-04-25
 
 ### Added — End-to-end App Store submission

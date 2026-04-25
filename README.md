@@ -73,7 +73,7 @@ Same JSON shape as Claude Desktop — see [examples/](./examples/) for ready-to-
 
 ## Available Tools
 
-**60+ tools across 13 groups.** End-to-end App Store submission supported, except binary upload (use Transporter / `xcrun altool`) and initial app creation (web UI / Developer Portal).
+**80+ tools across 15 groups.** End-to-end App Store submission, Custom Product Pages, and Product Page Optimization (A/B tests) all supported. Only binary upload (use Transporter / `xcrun altool`) and initial app creation (web UI / Developer Portal) fall outside the API.
 
 ### Apps
 
@@ -168,6 +168,40 @@ Same JSON shape as Claude Desktop — see [examples/](./examples/) for ready-to-
 | `submit_review_submission` | Final submit to App Review. |
 | `create_phased_release` / `update_phased_release` | 7-day phased rollout. |
 | `create_app_store_version_release_request` | Manually release an approved version. |
+
+### Custom Product Pages (CPP)
+
+| Tool | Description |
+|------|-------------|
+| `list_custom_product_pages` | List CPPs (up to 70 per app). |
+| `get_custom_product_page` | Get one CPP. |
+| `create_custom_product_page` | Create a new CPP. |
+| `update_custom_product_page` | Rename or toggle visibility. |
+| `delete_custom_product_page` | Delete a CPP. |
+| `list_custom_product_page_versions` | List CPP version drafts and live versions. |
+| `create_custom_product_page_version` | Create a new CPP draft version. |
+| `list_custom_product_page_localizations` | Per-locale promo text. |
+| `create_custom_product_page_localization` | Add a locale with promo text. |
+| `update_custom_product_page_localization` | Edit promo text. |
+| `list_custom_product_page_screenshot_sets` | Screenshot sets for a CPP locale. |
+
+### Product Page Optimization (PPO / A-B tests)
+
+| Tool | Description |
+|------|-------------|
+| `list_app_store_version_experiments` | List PPO experiments on a version. |
+| `get_app_store_version_experiment` | Get one experiment. |
+| `create_app_store_version_experiment` | Create a new experiment with traffic share. |
+| `update_app_store_version_experiment` | Adjust traffic, name, or state. |
+| `delete_app_store_version_experiment` | Delete a non-running experiment. |
+| `list_experiment_treatments` | List treatments (variants, max 3). |
+| `create_experiment_treatment` | Create a variant. |
+| `update_experiment_treatment` | Rename / re-share treatment traffic. |
+| `delete_experiment_treatment` | Delete a treatment. |
+| `list_experiment_treatment_localizations` | Per-locale overrides. |
+| `create_experiment_treatment_localization` | Add a locale-scoped override. |
+| `start_app_store_version_experiment` | Start the experiment. |
+| `stop_app_store_version_experiment` | Stop the experiment. |
 
 ### Builds
 
